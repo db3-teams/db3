@@ -16,4 +16,4 @@
 // limitations under the License.
 //
 
-mod openrpc_parser;
+mod stream;

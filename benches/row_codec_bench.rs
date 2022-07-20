@@ -21,7 +21,7 @@ extern crate test;
 
 #[cfg(test)]
 mod tests {
-    use rtstore::codec::row_codec::{Data, RowRecordBatch};
+    use db3::codec::row_codec::{Data, RowRecordBatch};
     use test::Bencher;
     #[bench]
     fn bench_encode(b: &mut Bencher) {
@@ -33,7 +33,6 @@ mod tests {
         let row_batch = RowRecordBatch {
             batch,
             schema_version: 1,
-            id: "eth.price".to_string(),
         };
 
         b.iter(|| {

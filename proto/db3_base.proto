@@ -123,6 +123,11 @@ message DB3SchemaDesc {
     int32 version = 2;
 }
 
+enum DB3TableType {
+    KTimeSeriesTable = 0;
+    KStreamingTable = 1;
+}
+
 message DB3TableDesc {
     // the table name is like test.dev.table1
     string name = 1;

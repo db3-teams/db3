@@ -111,12 +111,24 @@ pub enum DB3Error {
     RPCInternalError(String),
     #[error("fail to parse json with error {0}")]
     JSONParseError(serde_json::Error),
+    #[error("fail to parse string {1} with error {0}")]
+    ParseNumberError(std::num::ParseIntError, String),
+    #[error("fail call json rpc for error {0}")]
+    JSONRpcError(jsonrpsee::core::Error),
+    #[error("fail to transform sql to plan for error {0}")]
+    SQLTransformError(String),
 }
 
 /// convert io error to rtstore error
 impl From<IoError> for DB3Error {
     fn from(error: IoError) -> Self {
         DB3Error::FSIoError(error)
+    }
+}
+
+impl From<jsonrpsee::core::Error> for DB3Error {
+    fn from(error: jsonrpsee::core::Error) -> Self {
+        DB3Error::JSONRpcError(error)
     }
 }
 

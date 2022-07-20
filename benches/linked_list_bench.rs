@@ -21,7 +21,7 @@ extern crate test;
 
 #[cfg(test)]
 mod tests {
-    use rtstore::base::linked_list::LinkedList;
+    use db3::base::linked_list::LinkedList;
     use test::Bencher;
     #[bench]
     fn bench_linked_list_push(b: &mut Bencher) {

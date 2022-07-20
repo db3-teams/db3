@@ -52,6 +52,14 @@ pub fn bytes_to_readable_num_str(bytes_size: u64) -> String {
 }
 
 #[inline]
+pub fn hex_string_to_u64(number: &str) -> Result<u64> {
+    let without_prefix = number.trim_start_matches("0x");
+    let result = u64::from_str_radix(without_prefix, 16)
+        .map_err(|e| DB3Error::ParseNumberError(e, number.to_string()))?;
+    Ok(result)
+}
+
+#[inline]
 pub fn gen_s3_url(bucket: &str, prefix: &[&str], filename: &str) -> String {
     format!("s3://{}/{}/{}", bucket, prefix.join("/"), filename)
 }
@@ -97,5 +105,13 @@ mod tests {
         let less_1k = 1023;
         let label = bytes_to_readable_num_str(less_1k);
         assert_eq!("1023.00 ", label);
+    }
+
+    #[test]
+    fn test_hex_to_u64() {
+        let number: &str = "0xA";
+        let result = hex_string_to_u64(number);
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap(), 10);
     }
 }

@@ -23,58 +23,57 @@ extern crate test;
 mod tests {
     use arrow::datatypes::Schema;
     use arrow::datatypes::*;
-    use rtstore::codec::row_codec::{Data, RowRecordBatch};
-    use rtstore::store::cell_store::{CellStore, CellStoreConfig};
+    use db3::codec::row_codec::{Data, RowRecordBatch};
+    use db3::store::cell_store::{CellStore, CellStoreConfig};
     use s3::bucket::Bucket;
     use s3::creds::Credentials;
     use std::sync::Arc;
     use tempdir::TempDir;
     use test::Bencher;
 
-    #[bench]
-    fn bench_cell_store(b: &mut Bencher) {
-        let valid_schema = Arc::new(Schema::new(vec![Field::new("c1", DataType::Int64, true)]));
-        let auth = Credentials::from_env_specific(
-            Some("AWS_S3_ACCESS_KEY"),
-            Some("AWS_S3_SECRET_KEY"),
-            None,
-            None,
-        )
-        .unwrap();
-        let tmp_dir_path = TempDir::new("put_records_bench").expect("create temp dir");
-        let bucket_name = "test_bk";
-        let region = "http://127.0.0.1:9090";
-        if let Some(tmp_dir_path_str) = tmp_dir_path.path().to_str() {
-            let local_binlog_path_prefix = tmp_dir_path_str.to_string();
-            let config = CellStoreConfig::new(
-                bucket_name,
-                region,
-                &valid_schema,
-                &local_binlog_path_prefix,
-                auth,
-            )
-            .unwrap();
-            if let Ok(c) = CellStore::new(config) {
-                b.iter(|| {
-                    // Inner closure, the actual test
-                    for _i in 1..100 {
-                        c.put_records(gen_sample_row_batch());
-                    }
-                });
-            }
-        }
-    }
+    //fn bench_cell_store(b: &mut Bencher) {
+    //    let valid_schema = Arc::new(Schema::new(vec![Field::new("c1", DataType::Int64, true)]));
+    //    let auth = Credentials::from_env_specific(
+    //        Some("AWS_S3_ACCESS_KEY"),
+    //        Some("AWS_S3_SECRET_KEY"),
+    //        None,
+    //        None,
+    //    )
+    //    .unwrap();
+    //    let tmp_dir_path = TempDir::new("put_records_bench").expect("create temp dir");
+    //    let bucket_name = "test_bk";
+    //    let region = "http://127.0.0.1:9090";
+    //    if let Some(tmp_dir_path_str) = tmp_dir_path.path().to_str() {
+    //        let local_binlog_path_prefix = tmp_dir_path_str.to_string();
+    //        let config = CellStoreConfig::new(
+    //            bucket_name,
+    //            region,
+    //            &valid_schema,
+    //            &local_binlog_path_prefix,
+    //            auth,
+    //        )
+    //        .unwrap();
+    //        if let Ok(c) = CellStore::new(config) {
+    //            b.iter(|| {
+    //                // Inner closure, the actual test
+    //                for _i in 1..100 {
+    //                    c.put_records(gen_sample_row_batch());
+    //                }
+    //            });
+    //        }
+    //    }
+    //}
 
-    fn gen_sample_row_batch() -> RowRecordBatch {
-        let batch = vec![
-            vec![Data::Int32(12)],
-            vec![Data::Int32(11)],
-            vec![Data::Int32(10)],
-        ];
-        RowRecordBatch {
-            batch,
-            schema_version: 1,
-            id: "eth.price".to_string(),
-        }
-    }
+    //fn gen_sample_row_batch() -> RowRecordBatch {
+    //    let batch = vec![
+    //        vec![Data::Int32(12)],
+    //        vec![Data::Int32(11)],
+    //        vec![Data::Int32(10)],
+    //    ];
+    //    RowRecordBatch {
+    //        batch,
+    //        schema_version: 1,
+    //        id: "eth.price".to_string(),
+    //    }
+    //}
 }

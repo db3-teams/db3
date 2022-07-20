@@ -44,12 +44,18 @@ extern crate pretty_env_logger;
 uselog!(debug, info, warn);
 use clap::{Parser, Subcommand};
 
-const ABOUT: &str = "web3 timeseries database for data analytics 🚀🚀🚀";
-const AUTHOR: &str = "db3.network";
+const ABOUT: &str = "
+██████╗ ██████╗ ██████╗ 
+██╔══██╗██╔══██╗╚════██╗
+██║  ██║██████╔╝ █████╔╝
+██║  ██║██╔══██╗ ╚═══██╗
+██████╔╝██████╔╝██████╔╝
+╚═════╝ ╚═════╝ ╚═════╝ 
+@db3.network🚀🚀🚀";
 
 #[derive(Debug, Parser)]
 #[clap(name = "db3")]
-#[clap(author = AUTHOR, version = build::PKG_VERSION, about = ABOUT, long_about = None)]
+#[clap(about = ABOUT, long_about = None)]
 struct Cli {
     #[clap(subcommand)]
     command: Commands,

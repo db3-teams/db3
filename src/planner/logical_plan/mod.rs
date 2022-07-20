@@ -1,6 +1,6 @@
 //
 //
-// lib.rs
+// mod.rs
 // Copyright (C) 2022 db3.network Author imotai <codego.me@gmail.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,20 +16,13 @@
 // limitations under the License.
 //
 
-#![feature(result_option_inspect)]
-#[macro_use(uselog)]
-extern crate uselog_rs;
-pub mod base;
-pub mod catalog;
-pub mod codec;
-pub mod compute_node;
-pub mod error;
-pub mod etl_node;
-pub mod frontend_node;
-pub mod memory_node;
-pub mod meta_node;
-pub mod parser;
-pub mod planner;
-pub mod proto;
-pub mod sdk;
-pub mod store;
+use crate::error::{DB3Error, Result};
+use crate::proto::substrait::{Plan, PlanRel};
+use tree_sitter::{Tree, TreeCursor};
+
+pub mod query_logical_plan;
+
+// convert syntax tree to substrait plan
+//pub fn build_logical_plan(tree:Tree) -> Result<substrait::Plan> {
+//    let mut tree_cursor = tree.walk();
+//}

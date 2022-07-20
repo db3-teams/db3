@@ -1,6 +1,6 @@
 //
 //
-// rpc_catalog.rs
+// incr_op.rs
 // Copyright (C) 2022 db3.network Author imotai <codego.me@gmail.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,20 +16,14 @@
 // limitations under the License.
 //
 
-struct OpenRPCConfig {
-    config_path:String,
-    servers:Option<Vec<String>>,
-    // the name of public chain
-    name:String
+
+/// Used for increasing the id, e.g. block number
+pub struct IncrOperator {
+    step:u32,
+    start:u64,
 }
 
-struct OpenRPCTable {
-    name:String,
-}
-
-struct OpenRPCDatabase {
-}
-
-struct OpenRPCCatalog {
-    config: OpenRPCConfig,
+impl IncrOperator {
+    pub fn call(&self, )->u64 {
+    }
 }

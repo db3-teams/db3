@@ -16,3 +16,9 @@
 [submodule "thirdparty/timely-dataflow"]
 	path = thirdparty/timely-dataflow
 	url = https://github.com/db3-teams/timely-dataflow.git
+[submodule "thirdparty/tree-sitter-sql"]
+	path = thirdparty/tree-sitter-sql
+	url = https://github.com/m-novikov/tree-sitter-sql.git
+[submodule "thirdparty/jsonrpsee"]
+	path = thirdparty/jsonrpsee
+	url = https://github.com/paritytech/jsonrpsee.git

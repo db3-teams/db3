@@ -47,9 +47,14 @@ etcd-client = "0.9"
 rand = "0.8.5"
 regex = "1.5.5"
 string-builder = "0.2.0"
-pg_wire = { path = "./thirdparty/pg_wire", features = ["tokio_net"] , version="0.8.1"}
 shadow-rs = "0.11.0"
-jsonrpsee-http-client = "0.14.0"
+jsonrpsee = {path="./thirdparty/jsonrpsee/jsonrpsee" ,versio="0.14.0", features = ["full"]}
+hex = "0.4.3"
+pg_wire = { path = "./thirdparty/pg_wire", features = ["tokio_net"] , version="0.8.1"}
+tree-sitter = "0.19.3"
+tree-sitter-sql =  {path="./thirdparty/tree-sitter-sql", version="0.0.2"}
+substring = "1.4.5"
+
 [[bin]]
 name = "db3"
 path = "src/cmd/db3.rs"
